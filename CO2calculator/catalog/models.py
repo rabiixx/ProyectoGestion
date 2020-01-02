@@ -15,14 +15,15 @@ class Tabla(models.Model):
         """
         return str(self.id)
 class ConsumoTotal(models.Model):
-    usuario = models.ForeignKey('auth.User',on_delete=models.CASCADE)
+    email=models.EmailField()
     litrosAgua = models.FloatField(max_length=200)
+    numeroEdificios=models.IntegerField()
     text = models.TextField()
     created_date = models.DateTimeField(
         default=timezone.now)
 
     def __str__(self):
-        return self.id
+        return self.email
 
 
     

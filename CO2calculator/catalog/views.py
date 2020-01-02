@@ -1,12 +1,11 @@
 from django.shortcuts import render
 from .models import Tabla
 from django.views import generic
-
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 import datetime
-
+from .models import ConsumoTotal
 # Create your views here.
 def index(request):
 
@@ -19,6 +18,9 @@ class TablaListView(generic.ListView):
 
 class TablaDetailView(generic.DetailView):
     model = Tabla
+
+class ConsumoTotalList(generic.ListView):
+    model = ConsumoTotal
 
 def home(request):
 	 return render(request, 'home.html')
