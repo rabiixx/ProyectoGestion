@@ -1,5 +1,5 @@
 from django.db import models
-import datetime
+from django.utils import timezone
 
 class Tabla(models.Model):
     """
@@ -14,5 +14,15 @@ class Tabla(models.Model):
         Cadena que representa a la instancia particular del modelo (p. ej. en el sitio de Administración)
         """
         return str(self.id)
+class ConsumoTotal(models.Model):
+    usuario = models.ForeignKey('auth.User',on_delete=models.CASCADE)
+    litrosAgua = models.FloatField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(
+        default=timezone.now)
+
+    def __str__(self):
+        return self.id
+
 
     
