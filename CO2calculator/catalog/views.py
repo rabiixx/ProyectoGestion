@@ -59,8 +59,15 @@ def renew_tabla(request, pk):
 
     return render(request, 'catalog/tabla_renew.html', {'form': form, 'tablainst':tabla_inst})
 
-def prueba(request):
-	 return render(request, 'prueba.html')
+def home(request):
+	 return render(request, 'home.html')
 
 def radio_buttons(request):
     return render(request, 'radio.html')
+
+def about(request):
+    return render(request, 'about.html')
+
+def calculator(request):
+    return render(request, 'calculator.html')
+

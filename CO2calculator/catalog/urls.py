@@ -9,7 +9,8 @@ urlpatterns = [
 	url(r'^tabla/$', views.TablaListView.as_view(), name='tabla'),
 	url(r'^tabla/(?P<pk>\d+)$', views.TablaDetailView.as_view(), name='tabla-detail'), 
     url(r'^tabla/(?P<pk>[-\w]+)/renew/$', views.renew_tabla, name='renew-tabla'),
-    url(r'^prueba/$', views.prueba, name='prueba'),
+    url(r'^home/$', views.home, name='home'),
+    url(r'^about/$', views.about, name='about'),
+    url(r'^calculator/$', views.calculator, name='calculator'),
     path('radio', views.radio_buttons, name='radio_buttons'),
-
 ]
