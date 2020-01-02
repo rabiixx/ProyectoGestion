@@ -1,0 +1,19 @@
+% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Lista de tablas</h1>
+
+    {% if tabla_list %}
+    <ul>
+
+      {% for tabla in tabla_list %}
+      <li>
+        <a href="{{ tabla.get_absolute_url }}"> {{ tabla.id }}</a>{{ tabla.fecha }}</a> {{tabla.consumo}}
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no tablas in the library.</p>
+    {% endif %}       
+{% endblock %}
