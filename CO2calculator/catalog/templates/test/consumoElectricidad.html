@@ -1,10 +1,26 @@
+{% extends 'test/basePaginaTest.html' %}
+{% block imagen %}
+background-image:url('https://espaciociencia.com/wp-content/uploads/como-funciona-la-electricidad-600x393.jpg');
+{% endblock %}
+{% block pregunta %}
+<h1>Consumo de electricidad</h1>
+<p>Tipo de electricidad</p>
+<p>
+<select name="tipoElectricidad">
+	<option>Autogenerada</option>
+	<option>Renovable</option>
+	<option>Fósil</option>
+</select>
+</p>
+<p>Consumo por semana (kW):</p>
+<div class="slidecontainer">
+  <input  type="range" min="0" max="300" value="150" class="slider" id="myRange">
+  <p>kWh: <span id="demo"></span></p>
+</div>
+{% endblock %}
+{% block siguiente %}
+href="../calefaccion"
+{% endblock %}
 
-<!DOCTYPE html>
-{% extends 'cabecera.html' %}
-<body>
-	{% block cabecera %}
-		<p>Bienvenidos a CO2 calculator </p>
-	{% endblock %}
-</body>
 
 

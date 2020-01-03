@@ -4,15 +4,11 @@ background-image:url('https://concepto.de/wp-content/uploads/2019/09/cuidado-del
 {% endblock %}
 {% block pregunta %}
 <h1>Consumo de agua</h1>
-<p>Litros de agua consumidos por mes:</p>
-<p>
-<input type="number" id="myNumber" value="2">
-</p>
-<script>
-function myFunction() {
-  var x = document.getElementById("myNumber").value;
-}
-</script>
+<form method="POST">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="image" class='flecha'src="https://cdn.pixabay.com/photo/2012/04/05/01/58/arrow-25856_960_720.png" alt="Flecha" width="60" height="60">
+</form>
 {% endblock %}
 
 {% block siguiente %}

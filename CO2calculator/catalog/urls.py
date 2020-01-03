@@ -13,5 +13,11 @@ urlpatterns = [
     url(r'^calculator/$', views.calculator, name='calculator'),
     url(r'^agua/$', views.agua, name='agua'),
     url(r'^vehiculos/$', views.vehiculos, name='vehiculos'),
-    path('radio', views.radio_buttons, name='radio_buttons'),
+    url(r'^edificios/$', views.edificios, name='edificios'),
+    url(r'^consumoElectricidad/$', views.consumoElectricidad, name='consumoElectricidad'),
+    url(r'^calefaccion/$', views.calefaccion, name='calefaccion'),
+    url(r'^personal/$', views.personal, name='personal'),
+    url(r'^register/$', views.register, name='register'),
+    url(r'^login/$', views.login, name='login'),
+    url(r'^logout/$', views.logout, name='logout'),
 ]

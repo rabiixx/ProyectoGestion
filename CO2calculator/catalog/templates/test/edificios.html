@@ -1,10 +1,29 @@
-
-<!DOCTYPE html>
-{% extends 'cabecera.html' %}
-<body>
-	{% block cabecera %}
-		<p>Bienvenidos a CO2 calculator </p>
-	{% endblock %}
-</body>
-
+{% extends 'test/basePaginaTest.html' %}
+{% block imagen %}
+background-image:url('https://image.freepik.com/vector-gratis/ilustracion-edificios-modernos-noche-fondo-grandes-edificios-urbanos_1441-2165.jpg');
+{% endblock %}
+{% block pregunta %}
+<h1>Consumo de edificios</h1>
+<p>Número de edificios:</p>
+<p>
+<input type="number" id="myNumber" value="2">
+</p>
+<script>
+function myFunction() {
+  var x = document.getElementById("myNumber").value;
+}
+</script>
+<p>Tipo de material del edificio</p>
+<p>
+<select name="material">
+	<option>Cemento</option>
+	<option>Madera</option>
+	<option>Acero</option>
+	<option>Eléctrico</option>
+</select>
+</p>
+{% endblock %}
+{% block siguiente %}
+href="../consumoElectricidad"
+{% endblock %}
 
