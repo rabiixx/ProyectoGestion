@@ -6,8 +6,6 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 import datetime
 from .models import ConsumoTotal
-import json
-from urllib.request import urlopen
 
 # Create your views here.
 def index(request):

@@ -25,5 +25,13 @@ class ConsumoTotal(models.Model):
     def __str__(self):
         return self.email
 
+# Tabla de Factores de Emision
+class FactorEmision(models.Model):
+    combustible = models.CharField(max_length = 35)
+    factor_emision = models.FloatField()
+    created_date = models.DateTimeField()
+    unidad_fe = models.CharField(max_length = 10, default='kgCO2/l')
 
-    
+    def __str__(self):
+        cadena = "{0}   {1}"
+        return cadena.format(self.combustible, self.factor_emision);

@@ -78,7 +78,7 @@ background-image:url('https://www.movele.es/wp-content/uploads/2019/03/Dibujo-de
 <script>
 	function myFunction(argument) {
 		document.getElementById('myRange').value = "280";
-		api_url = 'https://api.triptocarbon.xyz/v1/footprint?activity=10&activityType=miles&country=usa&mode=taxi';
+		api_url = 'https://api.triptocarbon.xyz/v1/footprint?activity=1&activityType=miles&country=usa&mode=taxi';
 		response = urlopen(api_url);
 		data = json.loads(response.read());
 		pritn('holdsanldj');
