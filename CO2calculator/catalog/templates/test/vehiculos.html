@@ -69,23 +69,40 @@ background-image:url('https://www.movele.es/wp-content/uploads/2019/03/Dibujo-de
   <input  type="range" min="0" max="300" value="150" class="slider" id="myRange">
   <p>Kilómetros: <span id="demo"></span></p>
 </div>
-<button onclick="myFunction()">Try it</button>
+<button onclick="hola()">Try it</button>
 <!--<div class="center">
         <input type="submit" name="CalcularCO2" value="Calcular"  onclick="myFunction()" id="ButtonCarCalculate" class="button" />
 </div>-->
 
-<p>Consumo: <span id="output"></span></p>
+<!--<p>Consumo: <span id="output"></span></p>-->
 <script>
-
-function myFunction(argument) {
-	api_url = 'https://api.triptocarbon.xyz/v1/footprint?activity=10&activityType=miles&country=usa&mode=taxi'
-	response = urlopen(api_url)
-	data = json.loads(response.read())
-	document.getElementById('output').value = data['carbonFootprint'];
-	document.getElementById('myRange').value = "280";
-}
+	function myFunction(argument) {
+		document.getElementById('myRange').value = "280";
+		api_url = 'https://api.triptocarbon.xyz/v1/footprint?activity=10&activityType=miles&country=usa&mode=taxi';
+		response = urlopen(api_url);
+		data = json.loads(response.read());
+		pritn('holdsanldj');
+		document.getElementById('myText').value = data['carbonFootprint'];
+	}
 </script>
 
+<script >
+	function hola() {
+		var xhr = new XMLHttpRequest();
+		var url = 'https://api.triptocarbon.xyz/v1/footprint?activity=10&activityType=miles&country=usa&mode=taxi';
+
+		xhr.open('ldsf', url, false);
+
+		xhr.send(null);
+		print('dasnfds');
+		var response = xhr.responseText;
+		document.getElementById('myText').value = response;
+	}
+</script>
+
+
+
+<h1>Consumo: <span id='myText'></span></h1>
 
 
 <p>Tipo de combustible</p>
