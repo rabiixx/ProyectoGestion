@@ -1,11 +1,24 @@
-from django import forms
+{% extends 'test/basePaginaTest.html' %}
+{% block imagen %}
+background-image:url('https://concepto.de/wp-content/uploads/2019/09/cuidado-del-agua-ecologia-e1568833822560.jpg');
+{% endblock %}
+{% block pregunta %}
+<h1>Consumo de agua</h1>
+<p>Litros de agua consumidos por mes:</p>
+<p>
+<input type="number" id="myNumber" value="2">
+</p>
+<script>
+function myFunction() {
+  var x = document.getElementById("myNumber").value;
+}
+</script>
+{% endblock %}
 
-from .models import ConsumoTotal
-
-class PostForm(forms.ModelForm):
-
-    class Meta:
-        model = Post
-        fields = ('title', 'text',)
-
-
+{% block siguiente %}
+href="../vehiculos"
+{% endblock %}
+{% block submit %}
+onClick="myFunction()"
+{% endblock %}
+<!--HAY QUE HACER QUE LA FLECHA SIRVA PARA SUBMIT DE LOS DATOS!!!!!!! \-->

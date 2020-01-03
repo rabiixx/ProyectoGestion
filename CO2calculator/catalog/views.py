@@ -34,3 +34,10 @@ def about(request):
 def calculator(request):
     return render(request, 'calculator.html')
 
+def agua(request):
+    return render(request, 'test/agua.html')
+    
+def vehiculos(request):
+    return render(request, 'test/vehiculos.html')
+
+

@@ -11,5 +11,7 @@ urlpatterns = [
     url(r'^home/$', views.home, name='home'),
     url(r'^about/$', views.about, name='about'),
     url(r'^calculator/$', views.calculator, name='calculator'),
+    url(r'^agua/$', views.agua, name='agua'),
+    url(r'^vehiculos/$', views.vehiculos, name='vehiculos'),
     path('radio', views.radio_buttons, name='radio_buttons'),
 ]
