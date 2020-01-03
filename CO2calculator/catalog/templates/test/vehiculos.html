@@ -1,6 +1,59 @@
-<!--
+<!DOCTYPE html>
+<html>
+
+</html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Navigation bar with social media icons -->
+<div class="w3-bar w3-black w3-hide-small">
+  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-facebook-official"></i></a>
+  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-instagram"></i></a>
+  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-snapchat"></i></a>
+  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-flickr"></i></a>
+  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-twitter"></i></a>
+  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-linkedin"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-right"><i class="fa fa-search"></i></a>
+</div>
+
+  <header class="w3-container w3-center w3-padding-48 w3-white">
+    <h1 class="w3-xxxlarge"><b>Consumo Vehiculos</b></h1>
+    <h6>Calcula el cosumo de CO2 de tu <span class="w3-tag">Empresa</span></h6>
+  </header>
+
 <head>
 	<style>
+
+		h1{ 
+		  display: block;
+		  font-size: 2em;
+		  margin-top: 0.67em;
+		  margin-bottom: 0.67em;
+		  margin-left: 0;
+		  margin-right: 0;
+		  font-weight: bold;
+		}
+
+		h2, h3, h4 { 
+		  display: block;
+		  font-size: 2em;
+		  margin-top: 0.67em;
+		  margin-bottom: 0.67em;
+		  margin-left: 0;
+		  margin-right: 0;
+		  font-weight: bold;
+		  color:  #00A651;
+		}
+
+
+		.icon-selected {
+            color: #21A0C3;
+        }
+
 		.green-color {
 	    	color: #00A651;
 	    	cursor: pointer;
@@ -8,8 +61,8 @@
 
 		.button {
 			position:absolute;
-			top: 50%;
-    		left: 50%;
+			top: 70%;
+    		left: 47%;
 		    color: white;
 		    background-color: #00a651;
 		    padding: 15px;
@@ -40,11 +93,11 @@
 		}
 		
 	</style>
-</head>-->
+</head>
 
 {% extends 'test/basePaginaTest.html' %}
 {% block imagen %}
-background-image:url('https://www.movele.es/wp-content/uploads/2019/03/Dibujo-de-coche-cargando-electrico-850x491.jpg');
+background-image:url('https://images.unsplash.com/photo-1451847251646-8a6c0dd1510c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80');
 {% endblock %}
 {% block pregunta %}
 
@@ -54,66 +107,55 @@ background-image:url('https://www.movele.es/wp-content/uploads/2019/03/Dibujo-de
 	<link rel="stylesheet" type="text/css" href="catalog/static/css/style.css">
 </head>-->
 
-<h1>Consumo de vehículos</h1>
-<p>Tipo de vehículo</p>
+<h1 align=center>Consumo de vehículos</h1>
+<h3 align = center>Tipo de vehículo</h3>
 <p>
-<select name="transporte">
-	<option>Coche</option>
-	<option>Moto</option>
-	<option>Tren</option>
-	<option>Avión</option>
+<select id="transporte">
+	<option value="1">Coche</option>
+	<option value="2">Moto</option>
+	<option value="3">Tren</option>
+	<option value="4">Avión</option>
 </select>
 </p>
-<p>Kilómetros que recorre cada vehículo por semana:</p>
+<h3 align=center>Kilómetros que recorre cada vehículo por semana:</h3>
 <div class="slidecontainer">
   <input  type="range" min="0" max="300" value="150" class="slider" id="myRange">
   <p>Kilómetros: <span id="demo"></span></p>
 </div>
-<button onclick="hola()">Try it</button>
-<!--<div class="center">
-        <input type="submit" name="CalcularCO2" value="Calcular"  onclick="myFunction()" id="ButtonCarCalculate" class="button" />
-</div>-->
-
-<!--<p>Consumo: <span id="output"></span></p>-->
-<script>
-	function myFunction(argument) {
-		document.getElementById('myRange').value = "280";
-		api_url = 'https://api.triptocarbon.xyz/v1/footprint?activity=1&activityType=miles&country=usa&mode=taxi';
-		response = urlopen(api_url);
-		data = json.loads(response.read());
-		pritn('holdsanldj');
-		document.getElementById('myText').value = data['carbonFootprint'];
-	}
-</script>
-
-<script >
-	function hola() {
-		var xhr = new XMLHttpRequest();
-		var url = 'https://api.triptocarbon.xyz/v1/footprint?activity=10&activityType=miles&country=usa&mode=taxi';
-
-		xhr.open('ldsf', url, false);
-
-		xhr.send(null);
-		print('dasnfds');
-		var response = xhr.responseText;
-		document.getElementById('myText').value = response;
-	}
-</script>
-
-
-
-<h1>Consumo: <span id='myText'></span></h1>
-
 
 <p>Tipo de combustible</p>
 <p>
-<select name="combustible">
-	<option>Diésel</option>
-	<option>Gasolina</option>
-	<option>Gas Natural</option>
-	<option>Eléctrico</option>
+<select id="combustible">
+	<option value="1">Diésel</option>
+	<option value="2">Gasolina</option>
+	<option value="3">Gas Natural</option>
+	<option value="4">Eléctrico</option>
 </select>
 </p>
+
+
+<div class="center">
+        <input type="submit" name="CalcularCO2" value="Calcular"  onclick="hola()" id="ButtonCarCalculate" class="button" />
+</div>
+
+
+<script >
+	function hola() {
+		var x = document.getElementById("myRange").value;
+ 		document.getElementById("myText").innerHTML = x;
+
+		var e = document.getElementById("transporte");
+		document.getElementById("ds").innerHTML = e.options[e.selectedIndex].text;
+		
+	}
+</script>
+
+<h1>Consumo: <span id="textConsumo"></span></h1>
+<h1>Vehiculo: <span id="textVehiculo"></span></h1>
+<h1>Combustible <span id="textCombustible"></span></h1>
+
+
+
 {% endblock %}
 {% block siguiente %}
 href="../vehiculos"
