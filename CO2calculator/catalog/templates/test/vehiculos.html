@@ -1,8 +1,59 @@
+<!--
+<head>
+	<style>
+		.green-color {
+	    	color: #00A651;
+	    	cursor: pointer;
+		}
+
+		.button {
+			position:absolute;
+			top: 50%;
+    		left: 50%;
+		    color: white;
+		    background-color: #00a651;
+		    padding: 15px;
+		    font-size: 15px;
+		    border-radius: 3px;
+		    border: white solid 3px;
+		}
+
+		.button-small {
+		    color: white;
+		    background-color: #00a651;
+		    padding: 5px;
+		    font-size: 12px;
+		    border-radius: 5px;
+		    border: white solid 1px;
+		}
+
+		.button-on-white {
+		    border: #00a651 solid 3px;
+		}
+
+		.button:disabled {
+		    opacity: 0.4;
+		}
+
+		.slidecontainer {
+			width: 100%;
+		}
+		
+	</style>
+</head>-->
+
 {% extends 'test/basePaginaTest.html' %}
 {% block imagen %}
 background-image:url('https://www.movele.es/wp-content/uploads/2019/03/Dibujo-de-coche-cargando-electrico-850x491.jpg');
 {% endblock %}
 {% block pregunta %}
+
+
+
+<!--<head>
+	<link rel="stylesheet" type="text/css" href="catalog/static/css/style.css">
+</head>-->
+
 <h1>Consumo de vehículos</h1>
 <p>Tipo de vehículo</p>
 <p>
@@ -18,6 +69,25 @@ background-image:url('https://www.movele.es/wp-content/uploads/2019/03/Dibujo-de
   <input  type="range" min="0" max="300" value="150" class="slider" id="myRange">
   <p>Kilómetros: <span id="demo"></span></p>
 </div>
+<button onclick="myFunction()">Try it</button>
+<!--<div class="center">
+        <input type="submit" name="CalcularCO2" value="Calcular"  onclick="myFunction()" id="ButtonCarCalculate" class="button" />
+</div>-->
+
+<p>Consumo: <span id="output"></span></p>
+<script>
+
+function myFunction(argument) {
+	api_url = 'https://api.triptocarbon.xyz/v1/footprint?activity=10&activityType=miles&country=usa&mode=taxi'
+	response = urlopen(api_url)
+	data = json.loads(response.read())
+	document.getElementById('output').value = data['carbonFootprint'];
+	document.getElementById('myRange').value = "280";
+}
+</script>
+
+
+
 <p>Tipo de combustible</p>
 <p>
 <select name="combustible">
