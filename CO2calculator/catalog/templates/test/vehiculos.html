@@ -138,9 +138,17 @@ background-image:url('https://images.unsplash.com/photo-1451847251646-8a6c0dd151
         <input type="submit" name="CalcularCO2" value="Calcular"  onclick="hola()" id="ButtonCarCalculate" class="button" />
 </div>
 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+
+
+<script language="javascript">
+	js1();
+</script>
 
 <script >
 	function hola() {
+
 		var x = document.getElementById("myRange").value;
  		document.getElementById("myText").innerHTML = x;
 
@@ -150,9 +158,7 @@ background-image:url('https://images.unsplash.com/photo-1451847251646-8a6c0dd151
 </script>
 
 
-<script src=https://code.jquery.com/jquery-3.3.1.min.js></script>
 
-<script src="script.js"></script>
 
 <h1>Consumo: <span id="textConsumo"></span></h1>
 <h1>Vehiculo: <span id="textVehiculo"></span></h1>
