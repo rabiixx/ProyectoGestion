@@ -2,8 +2,11 @@
 <html>
 
 </html>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="application/javascript">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compaible" content="ie=edge">
+ 
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
@@ -23,9 +26,20 @@
   <header class="w3-container w3-center w3-padding-48 w3-white">
     <h1 class="w3-xxxlarge"><b>Consumo Vehiculos</b></h1>
     <h6>Calcula el cosumo de CO2 de tu <span class="w3-tag">Empresa</span></h6>
+	{% extends 'test/basePaginaTest.html' %}
+	{% block imagen %}
+	background-image:url('https://images.unsplash.com/photo-1451847251646-8a6c0dd1510c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80');
+	{% endblock %}
+	{% block pregunta %}
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	{% load static %}
+    <script type="application/javascript" src="{% static 'js/main.js' %}"></script>
   </header>
 
 <head>
+	
+	
+	
 	<style>
 
 		h1{ 
@@ -95,11 +109,6 @@
 	</style>
 </head>
 
-{% extends 'test/basePaginaTest.html' %}
-{% block imagen %}
-background-image:url('https://images.unsplash.com/photo-1451847251646-8a6c0dd1510c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80');
-{% endblock %}
-{% block pregunta %}
 
 
 
@@ -138,13 +147,8 @@ background-image:url('https://images.unsplash.com/photo-1451847251646-8a6c0dd151
         <input type="submit" name="CalcularCO2" value="Calcular"  onclick="hola()" id="ButtonCarCalculate" class="button" />
 </div>
 
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script type="text/javascript" src="main.js"></script>
 
 
-<script language="javascript">
-	js1();
-</script>
 
 <script >
 	function hola() {
