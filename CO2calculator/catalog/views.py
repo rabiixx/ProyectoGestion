@@ -13,7 +13,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as do_login
 from django.contrib.auth.forms import UserCreationForm
-from .forms import ConsumoAguaForm
+from .forms import ConsumoAguaForm,ConsumoVehiculoForm,ConsumoEdificiosForm
 # Create your views here.
 def index(request):
 
@@ -53,19 +53,27 @@ def agua(request):
         form = ConsumoAguaForm(request.POST)
         # Si el formulario es válido...
         if form.is_valid():
-            # Guardamos el formulario pero sin confirmarlo,
-            # así conseguiremos una instancia para manejarla
             instancia = form.save(commit=False)
-            # Podemos guardarla cuando queramos
+            instancia.nombreUsuario = request.user
             instancia.save()
-            # Después de guardar redireccionamos a la lista
             return redirect('../vehiculos')
-
     # Si llegamos al final renderizamos el formulario
     return render(request, 'test/agua.html', {'form': form})
     
 def vehiculos(request):
-    return render(request, 'test/vehiculos.html')
+    form=ConsumoVehiculoForm()
+     # Comprobamos si se ha enviado el formulario
+    if request.method == "POST":
+        # Añadimos los datos recibidos al formulario
+        form = ConsumoVehiculoForm(request.POST)
+        # Si el formulario es válido...
+        if form.is_valid():
+            instancia = form.save(commit=False)
+            instancia.nombreUsuario = request.user
+            instancia.save()
+            return redirect('../edificios')
+    # Si llegamos al final renderizamos el formulario
+    return render(request, 'test/vehiculos.html', {'form': form})
    
 
 def edificios(request):

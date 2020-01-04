@@ -14,32 +14,25 @@ class Tabla(models.Model):
 
 class ConsumoAgua(models.Model):
     litrosAgua = models.IntegerField()
-    nombreUsuario=models.TextField()
+    nombreUsuario=models.ForeignKey('auth.User',on_delete=models.CASCADE)
     
 
     def __str__(self):
         return str(self.id)
 
 class ConsumoVehiculo(models.Model):
-    nombreUsuario=models.ForeignKey('TestUs',on_delete=models.SET_NULL,null=True)
-    tipoVehiculo=models.TextField()
+    nombreUsuario= models.ForeignKey('auth.User',on_delete=models.CASCADE)
+    tipoVehiculo=models.CharField(max_length=20, help_text="(Vehículos dedicados a transporte)")
     kilometrosSemana=models.IntegerField()
-    tipoCombustible=models.TextField()
+    tipoCombustible=models.CharField(max_length=20, help_text="(Vehículos dedicados a transporte)")
 
     def __str__(self):
         return str(self.id)
 
 class ConsumoEdificios(models.Model):
-    nombreUsuario=models.ForeignKey('TestUs',on_delete=models.SET_NULL,null=True)
+    nombreUsuario= models.ForeignKey('auth.User',on_delete=models.CASCADE)
     numeroEdificios=models.IntegerField()
     tipoEdificio=models.TextField()
-
-    def __str__(self):
-        return str(self.id)
-
-class TestUs(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    nombreUsuario = models.TextField()
 
     def __str__(self):
         return str(self.id)

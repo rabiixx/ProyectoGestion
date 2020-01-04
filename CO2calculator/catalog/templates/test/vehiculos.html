@@ -4,6 +4,11 @@ background-image:url('https://www.movele.es/wp-content/uploads/2019/03/Dibujo-de
 {% endblock %}
 {% block pregunta %}
 <h1>Consumo de vehículos</h1>
+<form method="POST">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="image" class='flecha'src="https://cdn.pixabay.com/photo/2012/04/05/01/58/arrow-25856_960_720.png" alt="Flecha" width="60" height="60">
+</form>
 <p>Tipo de vehículo</p>
 <p>
 <select name="transporte">
