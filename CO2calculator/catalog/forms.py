@@ -4,6 +4,8 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _ 
 import datetime
 from .models import ConsumoAgua,ConsumoVehiculo,ConsumoEdificios,ConsumoElectricidad,ConsumoCalefaccion,PersonalEmpresa,ViajesEmpresa,GeneracionElectricidad,TestUsuario
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class TestUsuarioForm(ModelForm):
 	class Meta:

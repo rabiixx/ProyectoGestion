@@ -50,7 +50,7 @@ def calculator(request):
         return redirect('login')
 
 def test(request):
-    form=TestUsuarioForm()
+    form = TestUsuarioForm()
      # Comprobamos si se ha enviado el formulario
     if request.method == "POST":
         # Añadimos los datos recibidos al formulario
@@ -60,7 +60,6 @@ def test(request):
             instancia = form.save(commit=False)
             instancia.nombreUsuario = request.user
             instancia.save()
-
             return redirect('../agua/'+instancia.nombreTest)
     # Si llegamos al final renderizamos el formulario
     return render(request, 'test/test.html', {'form': form})
@@ -73,11 +72,15 @@ def agua(request,nombreTest_id):
         form = ConsumoAguaForm(request.POST)
         # Si el formulario es válido...
         if form.is_valid():
-            instancia = form.save(commit=False)
-            auxiliar=TestUsuario.objects.get(nombreTest=nombreTest_id)
-            instancia.nombreTest=auxiliar
+            instancia = form.save(commit = False)
+            print(form.cleaned_data)
+
+            auxiliar = TestUsuario.objects.get(nombreTest = nombreTest_id)
+            instancia.nombreTest = auxiliar
+            
             print(auxiliar)
             instancia.nombreUsuario = request.user
+            
             instancia.save()
             return redirect('../../vehiculos/'+nombreTest_id)
     # Si llegamos al final renderizamos el formulario
@@ -245,6 +248,16 @@ def cuenta(request):
         return render(request,'cuenta.html', context)
     else:
         return redirect('login')
+
+def calculo_final(request, nombreTest_id):
+    res = TestUsuario.objects.get(nombreTest = nombreTest_id)
+    co2_total = res.co2_agua + res.co2_vehiculo + res.co2_edificios + res.electricidad + res.calefaccion
+    res.co2_total = co2_total
+    res.save()
+
+    return render(request, "users/resultados.html", {'res': res})
+
+
 
 
 class AguaListView(generic.ListView):

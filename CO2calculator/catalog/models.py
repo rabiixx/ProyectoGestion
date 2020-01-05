@@ -14,7 +14,14 @@ class Tabla(models.Model):
 
 class TestUsuario(models.Model):
     nombreTest = models.CharField(max_length=30,unique=True)
-    nombreUsuario=models.ForeignKey('auth.User',on_delete=models.CASCADE)
+    nombreUsuario = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    co2_agua = models.FloatField(default=0)
+    co2_vehiculo = models.FloatField(default=0)
+    co2_edificios = models.FloatField(default=0)
+    co2_electricidad = models.FloatField(default=0)
+    co2_calefaccion = models.FloatField(default=0)
+    co2_total = models.FloatField(default=0)
+
 
     def __str__(self):
         return str(self.nombreTest)
