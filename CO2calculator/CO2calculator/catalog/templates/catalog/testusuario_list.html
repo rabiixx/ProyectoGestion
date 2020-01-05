@@ -1,0 +1,22 @@
+{% extends 'cabecera.html' %}
+
+{% block cabecera %}
+
+
+Lista de tablas <br><br><br>
+
+    {% if testusuario_list %}
+
+
+      {% for TestUsuario in testusuario_list %}
+
+        <a href="../../testDetallado/{{TestUsuario.nombreTest}}"> {{ TestUsuario.nombreTest }}</a>{{ TestUsuario.nombreUsuario }}</a><br>
+
+      {% endfor %}
+
+
+    {% else %}
+      <p>There are no tablas in the library.</p>
+    {% endif %}       
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'cabecera.html' %}
+<h1>Lista de tablas</h1>
+
+    {% if agua_list %}
+    <ul>
+
+      {% for ConsumoAgua in agua_list %}
+      <li>
+        <a href="{{ ConsumoAgua.get_absolute_url }}"> {{ ConsumoAgua.id }}</a>{{ ConsumoAgua.nombreUsuario }}</a> {{ConsumoAgua.listrosAgua}}</a> 
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no tablas in the library.</p>
+    {% endif %}       

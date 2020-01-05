@@ -1,0 +1,16 @@
+
+<h1>Lista de tablas</h1>
+
+    {% if consumoagua_list %}
+    <ul>
+
+      {% for ConsumoAgua in consumoagua_list %}
+      <li>
+        <a href="{{ ConsumoAgua.get_absolute_url }}"> {{ ConsumoAgua.id }}</a>{{ ConsumoAgua.nombreUsuario }}</a> {{ConsumoAgua.litrosAgua}}</a> 
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no tablas in the library.</p>
+    {% endif %}       

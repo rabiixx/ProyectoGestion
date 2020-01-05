@@ -1,0 +1,22 @@
+{% extends 'cabecera.html' %}
+
+{% block cabecera %}
+
+<h1>Lista de tablas</h1>
+
+    {% if cuenta %}
+    <ul>
+
+      {% for TestUsuario in cuenta %}
+      <li>
+        <a href="{{ TestUsuario.get_absolute_url }}"> {{ TestUsuario.nombreTest }}</a>{{ TestUsuario.nombreUsuario }}<br></a> <br>
+      </li>
+      <br>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no tablas in the library.</p>
+    {% endif %}       
+
+{% endblock %}
