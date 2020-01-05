@@ -3,38 +3,6 @@
 background-image:url('https://www.movele.es/wp-content/uploads/2019/03/Dibujo-de-coche-cargando-electrico-850x491.jpg');
 {% endblock %}
 {% block pregunta %}
-<h1>Consumo de vehículos</h1>
-<form method="POST">
-    {{ form.as_p }}
-    {% csrf_token %}
-    <input type="image" class='flecha'src="https://cdn.pixabay.com/photo/2012/04/05/01/58/arrow-25856_960_720.png" alt="Flecha" width="60" height="60">
-</form>
-<p>Tipo de vehículo</p>
-<p>
-<select name="transporte">
-	<option>Coche</option>
-	<option>Moto</option>
-	<option>Tren</option>
-	<option>Avión</option>
-</select>
-</p>
-<p>Kilómetros que recorre cada vehículo por semana:</p>
-<div class="slidecontainer">
-  <input  type="range" min="0" max="300" value="150" class="slider" id="myRange">
-  <p>Kilómetros: <span id="demo"></span></p>
-</div>
-<p>Tipo de combustible</p>
-<p>
-<select name="combustible">
-	<option>Diésel</option>
-	<option>Gasolina</option>
-	<option>Gas Natural</option>
-	<option>Eléctrico</option>
-</select>
-</p>
+<h1>Tipo de vehículo</h1>
 {% endblock %}
-{% block siguiente %}
-href="../edificios"
-{% endblock %}
-
 

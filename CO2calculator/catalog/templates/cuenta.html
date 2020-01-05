@@ -1,0 +1,18 @@
+
+<!DOCTYPE html>
+{% extends 'cabecera.html' %}
+<body>
+	{% block cabecera %}
+		<h2>Esta es tu cuenta. Tienes las siguientes tablas: </h2><br>
+		<p> Consumo de agua:  <a href="{% url 'consumoAgua' %}"> {{num_Agua}} </a> </p>
+		<p> Consumo de vehiculo: {{num_ConsumoVehiculo}} </p>
+		<p> Consumo de edificios: {{num_ConsumoEdificios}} </p>
+		<p> Consumo de electricidad: {{num_ConsumoElectricidad}} </p>
+		<p> Consumo de calefaccion: {{num_ConsumoCalefaccion}} </p>
+		<p> Consumo de personal: {{num_PersonalEmpresa}} </p>
+		<p> Consumo de viajes: {{num_ViajesEmpresa}} </p>
+		<p> Consumo de electricidad: {{num_GeneracionElectricidad}} </p>
+	{% endblock %}
+</body>
+
+

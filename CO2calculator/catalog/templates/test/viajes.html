@@ -1,10 +1,14 @@
+{% extends 'test/basePaginaTest.html' %}
+{% block imagen %}
+background-image:url('https://concepto.de/wp-content/uploads/2019/09/cuidado-del-agua-ecologia-e1568833822560.jpg');
+{% endblock %}
+{% block pregunta %}
+{% endblock %}
 
-<!DOCTYPE html>
-{% extends 'cabecera.html' %}
-<body>
-	{% block cabecera %}
-		<p>Bienvenidos a CO2 calculator </p>
-	{% endblock %}
-</body>
-
-
+{% block siguiente %}
+href="../vehiculos"
+{% endblock %}
+{% block submit %}
+onClick="myFunction()"
+{% endblock %}
+<!--HAY QUE HACER QUE LA FLECHA SIRVA PARA SUBMIT DE LOS DATOS!!!!!!! \-->

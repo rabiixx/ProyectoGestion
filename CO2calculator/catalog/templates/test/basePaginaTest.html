@@ -82,10 +82,14 @@
 </head>
 <body>
 
-<a {% block siguiente %}{% endblock %}></a> 
-
 {% block pregunta %}
 {% endblock %}
+<form method="POST">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="image" class='flecha'src="https://cdn.pixabay.com/photo/2012/04/05/01/58/arrow-25856_960_720.png" alt="Flecha" width="60" height="60">
+</form>
+
 <script>
 var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");

@@ -1,3 +1,20 @@
+{% extends 'test/basePaginaTest.html' %}
+{% block imagen %}
+background-image:url('https://www.energynews.es/wp-content/uploads/2018/10/Paneles_Solares.jpg');
+{% endblock %}
+{% block pregunta %}
+<h1>Consumo de personal</h1>
+<p>Consumo de personal total por hora (kWh)</p>
+<div class="slidecontainer">
+  <input  type="range" min="0" max="300" value="150" class="slider" id="myRange">
+  <p>kWh: <span id="demo"></span></p>
+</div>
+{% endblock %}
+{% block siguiente %}
+href="../personal"
+{% endblock %}
+
+
 
 
 
