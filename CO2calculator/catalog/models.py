@@ -127,3 +127,11 @@ class GeneracionElectricidad(models.Model):
     def  __str__(self):
         return str(self.id)
 
+class FactoresEmision(models.Model):
+    combustible = models.CharField( max_length = 50)
+    fecha = models.DateField()
+    factor_emision = models.FloatField()
+    unidad = models.CharField(default = "kgCO2/l", max_length=50)
+    
+    def  __str__(self):
+        return str(self.combustible)

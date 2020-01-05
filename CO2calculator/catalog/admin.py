@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Tabla
-from .models import ConsumoAgua,ConsumoEdificios,ConsumoVehiculo,TestUsuario
+from .models import ConsumoAgua,ConsumoEdificios,ConsumoVehiculo,TestUsuario, FactoresEmision
 # Register your models here.
 
 #Defin el encabezado que aparecera encima de los atributos de la clase definida en model
@@ -16,3 +16,5 @@ admin.site.register(ConsumoVehiculo)
 admin.site.register(ConsumoEdificios)
 
 admin.site.register(TestUsuario)
+
+admin.site.register(FactoresEmision)

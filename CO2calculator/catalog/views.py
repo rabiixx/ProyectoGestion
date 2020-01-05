@@ -29,14 +29,23 @@ class TablaDetailView(generic.DetailView):
     model = Tabla
 
 def resultado(request,nombreTest_id):
-    res = TestUsuario.objects.get(nombreTest = nombreTest_id)
-    co2_total = res.co2_agua + res.co2_vehiculo + res.co2_edificios + res.co2_electricidad + res.co2_calefaccion
-    res.co2_total = co2_total
-    res.save()
+
+    #res = TestUsuario.objects.get(nombreTest = nombreTest_id)
+    #co2_total = res.co2_agua + res.co2_vehiculo + res.co2_edificios + res.co2_electricidad + res.co2_calefaccion
+    
+
+    co2_vehiculos_total = 0
+    test_name = TestUsuario.objects.get(nombreTest = nombreTest_id)
+    entradas = ConsumoVehiculo.objects.filter(nombreTest = test_name)
+    for x in range(0, entradas.count()):
+        co2_vehiculos_total += entradas[x].co2_vehiculo
+
+    test_name.co2_total = co2_vehiculos_total
+    test_name.save()
 
     context={
         'url': nombreTest_id,
-        'res': res
+        'res': test_name
     }
     return render(request, 'test/resultado.html', context)
 
@@ -119,7 +128,8 @@ def vehiculos(request,nombreTest_id):
             data = json.loads(response.read())
 
             instancia.co2_vehiculo = data['carbonFootprint']
-
+            print(data['carbonFootprint'])
+            
             auxiliar = TestUsuario.objects.get(nombreTest = nombreTest_id)
             instancia.nombreTest = auxiliar
             instancia.nombreUsuario = request.user
