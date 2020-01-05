@@ -29,8 +29,14 @@ class TablaDetailView(generic.DetailView):
     model = Tabla
 
 def resultado(request,nombreTest_id):
+    res = TestUsuario.objects.get(nombreTest = nombreTest_id)
+    co2_total = res.co2_agua + res.co2_vehiculo + res.co2_edificios + res.co2_electricidad + res.co2_calefaccion
+    res.co2_total = co2_total
+    res.save()
+
     context={
         'url': nombreTest_id,
+        'res': res
     }
     return render(request, 'test/resultado.html', context)
 
@@ -98,8 +104,24 @@ def vehiculos(request,nombreTest_id):
         # Si el formulario es válido...
         if form.is_valid():
             instancia = form.save(commit=False)
-            auxiliar=TestUsuario.objects.get(nombreTest=nombreTest_id)
-            instancia.nombreTest=auxiliar
+
+            print(form.cleaned_data)
+
+            # Calculo CO2 API
+            query = 'https://api.triptocarbon.xyz/v1/footprint?activity=' + str(form.cleaned_data['kilometrosSemana']) + \
+                    '&activityType=miles&country=def&mode=' + form.cleaned_data['tipoVehiculo'] + \
+                    '&fuelType=' + form.cleaned_data['tipoCombustible']
+            print(query )
+
+
+            # Se hace la consulta a la API
+            response = urlopen(query)
+            data = json.loads(response.read())
+
+            instancia.co2_vehiculo = data['carbonFootprint']
+
+            auxiliar = TestUsuario.objects.get(nombreTest = nombreTest_id)
+            instancia.nombreTest = auxiliar
             instancia.nombreUsuario = request.user
             instancia.save()
             return redirect('../../vehiculospregunta/'+nombreTest_id)
