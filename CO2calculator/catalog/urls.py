@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^personal/(?P<nombreTest_id>\w*)/$', views.personal, name='personal'),
     url(r'^viajes/(?P<nombreTest_id>\w*)/$', views.viajes, name='viajes'),
     url(r'^generacionElectricidad/(?P<nombreTest_id>\w*)/$', views.generacionElectricidad, name='generacionElectricidad'),
+    url(r'^resultado/(?P<nombreTest_id>\w*)/$', views.resultado, name='resultado'),
     url(r'^consumoAgua/$', views.AguaListView.as_view(), name='consumoAgua'),
 ]

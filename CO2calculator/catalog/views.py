@@ -28,6 +28,12 @@ class TablaListView(generic.ListView):
 class TablaDetailView(generic.DetailView):
     model = Tabla
 
+def resultado(request,nombreTest_id):
+    context={
+        'url': nombreTest_id,
+    }
+    return render(request, 'test/resultado.html', context)
+
 def vehiculospregunta(request,nombreTest_id):
     context={
         'url': nombreTest_id,
@@ -164,7 +170,7 @@ def viajes(request,nombreTest_id):
             instancia.nombreUsuario = request.user
             instancia.save()
             return redirect('../../generacionElectricidad/'+nombreTest_id)
-    return render(request, 'test/personal.html', {'form': form})
+    return render(request, 'test/viajes.html', {'form': form})
 
 def generacionElectricidad(request,nombreTest_id):
     form = GeneracionElectricidadForm()
@@ -176,7 +182,7 @@ def generacionElectricidad(request,nombreTest_id):
             instancia.nombreTest=auxiliar
             instancia.nombreUsuario = request.user
             instancia.save()
-            return redirect('../../home')
+            return redirect('../../resultado/'+nombreTest_id)
     return render(request, 'test/generarElectricidad.html', {'form': form})
 
 def register(request):
@@ -221,7 +227,7 @@ def login(request):
                 # Hacemos el login manualmente
                 do_login(request, user)
                 # Y le redireccionamos a la portada
-                return redirect('home')
+                return redirect('calculator')
 
     # Si llegamos al final renderizamos el formulario
     return render(request, "users/login.html", {'form': form})

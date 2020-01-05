@@ -3,6 +3,29 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 import uuid
 
+TIPO_VEHICULO = (('Coche', 'Coche'),
+              ('Avión', 'Avión'),
+              ('Autobús', 'Autobús'),
+              ('Barco', 'Barco'),
+              ('Tren', 'Tren'))
+TIPO_COMBUSTIBLE_VEHICULO= (
+              ('motorGasoline', 'Gasolina'),
+              ('diesel', 'Diesel'),
+              ('aviationGasoline', 'aviationGasoline'),
+              ('jetFuel', 'jetFuel'),)
+TIPO_EDIFICIO= (
+              ('Cemento', 'Cemento'),
+              ('Madera', 'Madera'),
+              ('Acero', 'Acero'),)
+TIPO_CALEFACCION= (
+              ('Gas Natural', 'Gas Natural'),
+              ('Eléctrico', 'Eléctrico'),
+              ('Carbón', 'Carbón'),
+              ('Gasóleo', 'Gasóleo'),)
+TIPO_GENERAR= (
+              ('Paneles Solares', 'Paneles Solares'),
+              ('Minieolica', 'Minieolica'),)
+
 class Tabla(models.Model):
 
     fecha = models.DateTimeField()
@@ -29,9 +52,9 @@ class ConsumoAgua(models.Model):
 
 class ConsumoVehiculo(models.Model):
     nombreUsuario= models.ForeignKey('auth.User',on_delete=models.CASCADE)
-    tipoVehiculo=models.CharField(max_length=20, help_text="(Vehículos dedicados a transporte)")
+    tipoVehiculo=models.CharField(max_length=100,choices=TIPO_VEHICULO,default="Coche")
     kilometrosSemana=models.IntegerField()
-    tipoCombustible=models.CharField(max_length=20, help_text="(Vehículos dedicados a transporte)")
+    tipoCombustible=models.CharField(max_length=100,choices=TIPO_COMBUSTIBLE_VEHICULO,default="Gasolina")
     nombreTest=models.ForeignKey('TestUsuario',on_delete=models.CASCADE)
 
     def __str__(self):
@@ -40,7 +63,7 @@ class ConsumoVehiculo(models.Model):
 class ConsumoEdificios(models.Model):
     nombreUsuario= models.ForeignKey('auth.User',on_delete=models.CASCADE)
     numeroEdificios=models.IntegerField()
-    tipoEdificio=models.TextField()
+    tipoEdificio=models.CharField(max_length=100,choices=TIPO_EDIFICIO,default="Cemento")
     nombreTest=models.ForeignKey('TestUsuario',on_delete=models.CASCADE)
 
     def __str__(self):
@@ -56,8 +79,8 @@ class ConsumoElectricidad(models.Model):
 
 class ConsumoCalefaccion(models.Model):
     nombreUsuario = models.ForeignKey('auth.User',on_delete=models.CASCADE)
-    tipo = models.CharField(max_length=20, help_text="(Tipo de combustible para la calefaccion)")
-    gasto = models.FloatField()
+    tipo = models.CharField(max_length=100,choices=TIPO_CALEFACCION,default="Gas Natural")
+    gasto = models.IntegerField()
     nombreTest=models.ForeignKey('TestUsuario',on_delete=models.CASCADE)
     
     def __str__(self):
@@ -74,7 +97,7 @@ class PersonalEmpresa(models.Model):
 class ViajesEmpresa(models.Model):
     nombreUsuario = models.ForeignKey('auth.User',on_delete=models.CASCADE)
     numeroViajes = models.IntegerField()
-    distanciaMedia = models.FloatField()
+    distanciaMedia = models.IntegerField()
     nombreTest=models.ForeignKey('TestUsuario',on_delete=models.CASCADE)
     
     def __str__(self):
@@ -83,7 +106,7 @@ class ViajesEmpresa(models.Model):
 class GeneracionElectricidad(models.Model):
     nombreUsuario = models.ForeignKey('auth.User',on_delete=models.CASCADE)
     cantidadGenerada = models.FloatField()
-    tipo = models.CharField(max_length=20, help_text="(Tipo de instalaciones de generacion de electricidad)")
+    tipo = models.CharField(max_length=100,choices=TIPO_GENERAR,default="Paneles Solares")
     nombreTest=models.ForeignKey('TestUsuario',on_delete=models.CASCADE)
 
     def  __str__(self):
