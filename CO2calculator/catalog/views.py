@@ -207,17 +207,19 @@ def resultado(request,nombreTest_id):
     generacion=GeneracionElectricidad.objects.get(nombreTest__nombreTest=nombreTest_id)
     tablacons=TablaConstantes.objects.get(nombreUsuario=request.user)
 
-    auxiliar.co2_agua=agua.litrosAgua*tablacons.cons_agua
 
+#Consumo de agua
+    auxiliar.co2_agua=agua.litrosAgua*tablacons.cons_agua
+#Consumo de edificios
     if edificio.tipoEdificio=='Madera':
         auxiliar.co2_edificios=edificio.numeroEdificios*tablacons.cons_edificios_madera
     elif edificio.tipoEdificio=='Acero':
         auxiliar.co2_edificios=edificio.numeroEdificios*tablacons.cons_edificios_acero
     elif edificio.tipoEdificio=='Cemento':
         auxiliar.co2_edificios=edificio.numeroEdificios*tablacons.cons_edificios_cemento
-
+#Consumo de electricidad
     auxiliar.co2_electricidad=electricidad.kwHora*tablacons.cons_electricidad
-
+#Consumo de calefaccion
     if calefaccion.tipo=='Gas Natural':
         auxiliar.co2_calefaccion=calefaccion.gasto*tablacons.cons_calefaccion_gasnatural
     elif calefaccion.tipo=='Eléctrico':
@@ -226,25 +228,35 @@ def resultado(request,nombreTest_id):
         auxiliar.co2_calefaccion=calefaccion.gasto*tablacons.cons_calefaccion_carbon
     elif calefaccion.tipo=='Gasóleo':
         auxiliar.co2_calefaccion=calefaccion.gasto*tablacons.cons_calefaccion_gasoleo
-
+#Personal de empresa
     auxiliar.co2_personal=personal.numeroPersonal*tablacons.cons_personal
-
+#Generacion de electricidad
     if generacion.tipo=='Paneles Solares':
         auxiliar.co2_generacion=generacion.cantidadGenerada*tablacons.cons_generacion_panelessolares
     elif generacion.tipo=='Minieolica':
         auxiliar.co2_generacion=generacion.cantidadGenerada*tablacons.cons_generacion_minieolica
-
+#Consumo de vehiculos
     auxiliar.co2_vehiculo=0;
     listaVehiculos = ConsumoVehiculo.objects.filter(nombreTest__nombreTest=nombreTest_id)
+    data=0
     if listaVehiculos.count()>0:
         for x in listaVehiculos:
-            auxiliar.co2_vehiculo=auxiliar.co2_vehiculo+x.kilometrosSemana
+            query = 'https://api.triptocarbon.xyz/v1/footprint?activity=' + str(x.kilometrosSemana) + \
+                    '&activityType=miles&country=def&mode=' + x.tipoVehiculo + \
+                    '&fuelType=' + x.tipoCombustible
 
+            # Se hace la consulta a la API
+            response = urlopen(query)
+            res = json.loads(response.read())
+            data = data + float(res['carbonFootprint'])
+
+            auxiliar.co2_vehiculo = data
     auxiliar.co2_viajes=0;
     listaViajes = ViajesEmpresa.objects.filter(nombreTest__nombreTest=nombreTest_id)
     if listaViajes.count()>0:
         for x in listaViajes:
             auxiliar.co2_viajes=auxiliar.co2_viajes+x.distanciaMedia
+
 
 
     auxiliar.co2_total=auxiliar.co2_agua+auxiliar.co2_vehiculo+auxiliar.co2_edificios+auxiliar.co2_electricidad+auxiliar.co2_calefaccion+auxiliar.co2_personal+auxiliar.co2_viajes-auxiliar.co2_generacion
@@ -497,6 +509,30 @@ def logout(request):
 
 def accederCuenta(request):
     if request.user.is_authenticated:
+        alltest = TestUsuario.objects.filter(nombreUsuario=request.user)
+        for t in alltest:
+            #contamos cuantas instancias de tablas hay asociadas al test, si alguna es 0, lo borramos
+            a=ConsumoAgua.objects.filter(nombreTest=t).count()
+            ed=ConsumoEdificios.objects.filter(nombreTest=t).count()
+            el=ConsumoElectricidad.objects.filter(nombreTest=t).count()
+            c=ConsumoCalefaccion.objects.filter(nombreTest=t).count()
+            p=PersonalEmpresa.objects.filter(nombreTest=t).count()
+            g=GeneracionElectricidad.objects.filter(nombreTest=t).count()
+            ve=ConsumoVehiculo.objects.filter(nombreTest=t).count()
+            vi=ViajesEmpresa.objects.filter(nombreTest=t).count()
+            resultado=a*ed*el*c*p*g*ve*vi
+            if resultado == 0:
+                """ Esto borra las tablas asociadas
+                a=ConsumoAgua.objects.filter(nombreTest=t).delete()
+                ed=ConsumoEdificios.objects.filter(nombreTest=t).delete()
+                el=ConsumoElectricidad.objects.filter(nombreTest=t).delete()
+                c=ConsumoCalefaccion.objects.filter(nombreTest=t).delete()
+                p=PersonalEmpresa.objects.filter(nombreTest=t).delete()
+                g=GeneracionElectricidad.objects.filter(nombreTest=t).delete()
+                ve=ConsumoVehiculo.objects.filter(nombreTest=t).delete()
+                vi=ViajesEmpresa.objects.filter(nombreTest=t).delete()"""
+                t.delete()
+
         return redirect('../cuenta/'+request.user.username)
     else:
         return redirect('../login')

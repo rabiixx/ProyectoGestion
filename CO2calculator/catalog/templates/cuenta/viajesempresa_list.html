@@ -1,0 +1,22 @@
+{% extends 'cabecera.html' %}
+
+{% block cabecera %}
+
+
+<h1>Lista de tablas</h1>
+
+    {% if viajesempresa_list %}
+
+
+      {% for ViajesEmpresa in viajesempresa_list %}
+
+        <a href="../ViajesEmpresaDetail/{{ViajesEmpresa.id}}"> {{ ViajesEmpresa.id }}.-  {{ ViajesEmpresa.tipoVehiculo }}:</a> {{ ViajesEmpresa.numeroViajes }} </a>, {{ ViajesEmpresa.distanciaMedia }} </a>,{{ ViajesEmpresa.tipoCombustible }}</a><br><br>
+
+      {% endfor %}
+
+
+    {% else %}
+      <p>There are no tablas in the library.</p>
+    {% endif %}       
+
+{% endblock %}

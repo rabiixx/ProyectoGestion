@@ -1,0 +1,12 @@
+{% extends 'cabecera.html' %}
+
+{% block cabecera %}
+
+<h1>Generación electricidad</h1>
+
+<p><strong>cantidadGenerada:</strong> {{ generacionelectricidad.cantidadGenerada }}</p> 
+<p><strong>tipo:</strong> {{ generacionelectricidad.tipo }}</p> 
+
+<a href="../GeneracionElectricidadModify/{{generacionelectricidad.id}}" class="button">Modificar</a>
+
+{% endblock %}

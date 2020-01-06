@@ -1,0 +1,12 @@
+{% extends 'cabecera.html' %}
+
+{% block cabecera %}
+
+<h1>Consumo agua</h1>
+
+<p><strong>litrosAgua:</strong> {{ consumoagua.litrosAgua }}</p> 
+<p><strong>nombreUsuario:</strong> {{ consumoagua.nombreUsuario }}</p>
+
+<a href="../ConsumoAguaModify/{{consumoagua.id}}" class="button">Modificar</a>
+
+{% endblock %}

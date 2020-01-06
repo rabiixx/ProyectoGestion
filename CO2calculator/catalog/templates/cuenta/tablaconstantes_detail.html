@@ -1,0 +1,24 @@
+{% extends 'cabecera.html' %}
+
+{% block cabecera %}
+
+<p><strong>cons_agua:</strong> {{ tablaconstantes.cons_agua }}</p> 
+<p><strong>cons_edificios_acero:</strong> {{ tablaconstantes.cons_edificios_acero }}</p>
+<p><strong>cons_edificios_madera:</strong> {{ tablaconstantes.cons_edificios_madera }}</p>
+<p><strong>cons_edificios_cemento:</strong> {{ tablaconstantes.cons_edificios_cemento }}</p>
+<p><strong>cons_electricidad:</strong> {{ tablaconstantes.cons_electricidad }}</p> 
+<p><strong>cons_calefaccion_gasnatural:</strong> {{ tablaconstantes.cons_calefaccion_gasnatural }}</p>
+<p><strong>cons_calefaccion_carbon:</strong> {{ tablaconstantes.cons_calefaccion_carbon }}</p> 
+<p><strong>cons_calefaccion_gasoleo:</strong> {{ tablaconstantes.cons_calefaccion_gasoleo }}</p> 
+<p><strong>cons_calefaccion_electrico:</strong> {{ tablaconstantes.cons_calefaccion_electrico }}</p>  
+<p><strong>cons_personal:</strong> {{ tablaconstantes.cons_personal }}</p> 
+<p><strong>cons_viajes:</strong> {{ tablaconstantes.cons_viajes }}</p> 
+<p><strong>cons_generacion_panelessolares:</strong> {{ tablaconstantes.cons_generacion_panelessolares }}</p> 
+<p><strong>cons_generacion_minieolica:</strong> {{ tablaconstantes.cons_generacion_minieolica }}</p> 
+<p><strong>cons_compensar_españa:</strong> {{ tablaconstantes.cons_compensar_españa }}</p> 
+<p><strong>cons_compensar_otros:</strong> {{ tablaconstantes.cons_compensar_otros }}</p> 
+
+
+<a href="../../constantesModify/{{tablaconstantes.id}}" class="button">Modificar</a>
+
+{% endblock %}

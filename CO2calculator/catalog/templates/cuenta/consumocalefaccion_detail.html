@@ -1,0 +1,12 @@
+{% extends 'cabecera.html' %}
+
+{% block cabecera %}
+
+<h1>Consumo calefacción</h1>
+
+<p><strong>tipo:</strong> {{ consumocalefaccion.tipo }}</p> 
+<p><strong>gasto:</strong> {{ consumocalefaccion.gasto }}</p> 
+
+<a href="../ConsumoCalefaccionModify/{{consumocalefaccion.id}}" class="button">Modificar</a>
+
+{% endblock %}

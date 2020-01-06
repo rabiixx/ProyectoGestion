@@ -1,0 +1,13 @@
+{% extends 'cabecera.html' %}
+
+{% block cabecera %}
+
+<h1>Constantes</h1>
+
+
+<p><strong>kwHora:</strong> {{ consumoelectricidad.kwHora }}</p> 
+
+
+<a href="../ConsumoElectricidadModify/{{consumoelectricidad.id}}" class="button">Modificar</a>
+
+{% endblock %}

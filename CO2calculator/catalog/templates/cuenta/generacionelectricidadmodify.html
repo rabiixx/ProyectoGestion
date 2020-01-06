@@ -1,0 +1,12 @@
+{% extends 'cabecera.html' %}
+
+{% block cabecera %}
+
+<h1>Generacion Electricidad</h1>
+<form method="POST">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Aplicar Cambios">
+</form>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'cabecera.html' %}
+
+{% block cabecera %}
+
+<h1>Consumo viajes</h1>
+
+<p><strong>Tipo de vehiculo:   </strong> {{ consumovehiculo.tipoVehiculo }}</p> 
+<p><strong>numeroViajes:</strong> {{ viajesempresa.numeroViajes }}</p> 
+<p><strong>distanciaMedia:</strong> {{ viajesempresa.distanciaMedia }}</p>
+<p><strong>Tipo de combustible:    </strong> {{ consumovehiculo.tipoCombustible }}</p> 
+
+<a href="../ViajesEmpresaModify/{{viajesempresa.id}}" class="button">Modificar</a>
+
+{% endblock %}

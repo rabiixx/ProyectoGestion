@@ -1,0 +1,15 @@
+{% extends 'cabecera.html' %}
+
+{% block cabecera %}
+
+    <li style="background-color: lightblue"><a href="../../ConsumoAguaDetail/{{pk_agua}}">ConsumoAgua</a></li>
+    <li style="background-color: lightblue"><a href="../../ConsumoVehiculoList/{{nomtest}}">ConsumoVehiculo</a></li>
+    <li style="background-color: lightblue"><a href="../../ConsumoEdificiosDetail/{{pk_edificios}}">ConsumoEdificios</a></li>
+    <li style="background-color: lightblue"><a href="../../ConsumoElectricidadDetail/{{pk_electricidad}}">ConsumoElectrico</a></li>
+	<li style="background-color: lightblue"><a href="../../ConsumoCalefaccionDetail/{{pk_calefaccion}}">ConsumoCalefaccion</a></li>
+    <li style="background-color: lightblue"><a href="../../PersonalEmpresaDetail/{{pk_personal}}">PersonalEmpresa</a></li>
+    <li style="background-color: lightblue"><a href="../../ViajesEmpresaList/{{nomtest}}">ViajesEmpresa</a></li>
+    <li style="background-color: lightblue"><a href="../../GeneracionElectricidadDetail/{{pk_generacion}}">GeneracionElectricidad</a></li>
+
+
+{% endblock %}

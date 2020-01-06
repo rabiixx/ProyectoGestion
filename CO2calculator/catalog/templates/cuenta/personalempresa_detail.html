@@ -1,0 +1,11 @@
+{% extends 'cabecera.html' %}
+
+{% block cabecera %}
+
+<h1>Consumo del personal de la empresa</h1>
+
+<p><strong>numeroPersonal:</strong> {{ personalempresa.numeroPersonal }}</p> 
+
+<a href="../PersonalEmpresaModify/{{personalempresa.id}}" class="button">Modificar</a>
+
+{% endblock %}

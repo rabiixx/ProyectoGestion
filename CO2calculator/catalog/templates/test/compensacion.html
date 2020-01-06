@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+	.boton {
+	    border: 2px solid #000000; /*anchura, estilo y color borde*/
+	    padding: 10px; /*espacio alrededor texto*/
+	    background-color: #f0f0f0; /*color botón*/
+	    color: #000000; /*color texto*/
+	    text-decoration: none; /*decoración texto*/
+	    text-transform: uppercase; /*capitalización texto*/
+	    font-family: 'Helvetica', sans-serif; /*tipografía texto*/
+	    -webkit-border-radius: 50px;
+  		-moz-border-radius: 50px;
+  		border-radius: 50px;
+	    
+    }
+    .boton:hover{
+		opacity: 0.50;
+		-moz-opacity: .50;
+		filter:alpha (opacity=50);
+	}
+	div { 
+	    font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; 
+	    color: #ffffff; 
+	    font-size: 18px; 
+	    font-weight: 400; 
+	    background: rgb(76, 76, 80);
+	    margin: 0 0 20px 0; 
+	    overflow: hidden; 
+	    padding: 10px; 
+	    border: 1px solid #000000;
+	  }
+	div.cuerpo {
+		margin: 10px 0 0 0; 
+		border-radius: 35px 35px 35px350px; 
+		-moz-border-radius: 35px 35px 35px 35px; 
+		-webkit-border-radius: 35px 35px 35px 35px; 
+		background: rgb(76, 76, 80,0.60);
+		}
+
+	body{
+		background-image:url('https://www.enbuenasmanos.com/wp-content/uploads/bfi_thumb/2097970-354ddfswpse0yonsmya1hm.jpg');
+		background-repeat: no-repeat;
+	  	background-attachment: fixed;
+	  	background-size: cover
+	}
+</style>
+</head>
+<body>
+<h1>Programas de compensacion</h1>
+<div class="cuerpo">
+	<p>Para compensar <strong>{{co2_total}}</strong> CO2eq emitido habría que aportar</p>
+	<p>En España: <strong>{{españa}} euros</strong></p>
+	<p>En países en vías de desarrollo: <strong>{{otros}} euros</strong></p>
+
+
+
+	<a style="margin: 0px 50px 50px 50px"class="boton" margin=50%  href="../../home">Finalizar</a>
+	<p> </p>
+</div>

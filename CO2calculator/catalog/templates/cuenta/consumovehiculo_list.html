@@ -1,0 +1,22 @@
+{% extends 'cabecera.html' %}
+
+{% block cabecera %}
+
+
+<h1>Lista de tablas</h1>
+
+    {% if consumovehiculo_list %}
+
+
+      {% for ConsumoVehiculo in consumovehiculo_list %}
+
+        <a href="../ConsumoVehiculoDetail/{{ConsumoVehiculo.id}}"> {{ ConsumoVehiculo.id }}.-  {{ ConsumoVehiculo.tipoVehiculo }}:</a> {{ ConsumoVehiculo.kilometrosSemana }} kmTotales/semana</a>, {{ ConsumoVehiculo.tipoCombustible }}</a><br><br>
+
+      {% endfor %}
+
+
+    {% else %}
+      <p>There are no tablas in the library.</p>
+    {% endif %}       
+
+{% endblock %}

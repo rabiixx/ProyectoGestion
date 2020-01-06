@@ -1,0 +1,24 @@
+{% extends 'cabecera.html' %}
+
+{% block cabecera %}
+
+
+Lista de tablas <br><br><br>
+
+    {% if testusuario_list %}
+
+
+      {% for TestUsuario in testusuario_list %}
+      
+
+        <a href="../../testDetallado/{{TestUsuario.nombreTest}}"> {{ TestUsuario.nombreTest }}</a> : {{TestUsuario.co2_total}}
+        <button onclick="window.location.href='../../resultado/{{TestUsuario.nombreTest}}';">Recalcular</button><br><br>
+
+      {% endfor %}
+
+
+    {% else %}
+      <p>No se ha realizado ningun test todavia.</p>
+    {% endif %}       
+
+{% endblock %}
