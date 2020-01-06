@@ -1,24 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
-	h1 {
-		font-family: 'Cinzel', serif;
-		color: white;
-	}
-	/* Header/Logo Title */
-	.header {
-		background: url('https://cdn.pixabay.com/photo/2017/06/05/10/15/landscape-2373649_1280.jpg') no-repeat top center;
-	  	background-attachment: fixed;
-	  	background-size: cover
-		padding: 100px;
-		text-align: center;
-		color: blue;
-		font-size: 40px;
-	}	
-
-
 	.boton {
 	    border: 2px solid #000000; /*anchura, estilo y color borde*/
 	    padding: 10px; /*espacio alrededor texto*/
@@ -63,25 +46,23 @@
 	  	background-size: cover
 	}
 </style>
-
-
-
 </head>
 <body>
+<h1>Resultado CO2</h1>
+<div class="cuerpo">
+	<p>El resultado es:</p>
+	<p>CO2 Agua: </strong>{{co2_agua}}</p>
+	<p>CO2 Vehículos: </strong>{{co2_vehiculo}}</p>
+	<p>CO2 Edificios: </strong>{{co2_edificios}}</p>
+	<p>CO2 Electricidad: </strong>{{co2_electricidad}}</p>
+	<p>CO2 Calefacción: </strong>{{co2_calefaccion}}</p>
+	<p>CO2 Personal: </strong>{{co2_personal}}</p>
+	<p>CO2 Viajes: </strong>{{co2_viajes}}</p>
+	<p>CO2 Energías Renovables: </strong>{{co2_generacion}}</p>
+	<p><strong>CO2 total: {{co2_total}}</strong></p>
 
-	<div class="header">
-		<h1 align = "center">Resultado CO2</h1>
-	</div>
-	
-	<div class="cuerpo">
 
-	<link href="https://fonts.googleapis.com/css?family=Cinzel&display=swap" rel="stylesheet">
-	<h2 align = "center">CO2 Agua: {{res.co2_agua}}</h2>
-	<h2 align = "center">CO2 Vehiculo: {{res.co2_vehiculo}}</h2>
-	<h2 align = "center">CO2 Calefaccion: {{res.co2_calefaccion}}</h2>
-	<h2 align = "center">CO2 Edificios: {{res.co2_edificios}}</h2>
-	<h2 align = "center">CO2 Electricidad: {{res.co2_electricidad}}</h2>
-	<h1 align = "center">CO2 Total: {{res.co2_total}}</h1>
-	<a align = "center" style="margin: 0px 50px 50px 50px"class="boton" margin=50%  href="../../home">Finalizar</a>
+	<a style="margin: 0px 50px 50px 50px"class="boton" margin=50%  href="../../home">Finalizar</a>
+	<a style="margin: 10px 50px 50px 50px"class="boton" margin=50%  href="../../compensacion/{{url}}">Programa compensación</a>
 	<p> </p>
 </div>

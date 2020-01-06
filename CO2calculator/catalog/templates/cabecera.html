@@ -26,6 +26,7 @@ h1{
     -moz-opacity: .50;
     filter:alpha (opacity=50);
   }
+  
 ul {
   list-style-type: none;
   margin: 0;
@@ -99,13 +100,13 @@ div.cuerpo {
 
 <ul>
   
-  <li><a href="../home"><img src="http://www.dmdarquitectos.com/wp-content/uploads/2019/05/home-icon.png" width="20" height="19" class="image" /></a></li>
-  <li><a href="../calculator">Calculator</a></li>
-  <li><a href="../about">About</a></li>
-  <li><a href="../login">Login</a></li>
-  <li><a href="../logout">Logout</a></li>
-  <li><a href="../cuenta">Cuenta</a></li>
-  <li><a href="../../admin">Admin</a></li>
+  <li><a href="{% url 'home' %}"><img src="http://www.dmdarquitectos.com/wp-content/uploads/2019/05/home-icon.png" width="20" height="19" class="image" /></a></li>
+  <li><a href="{% url 'calculator' %}">Calculator</a></li>
+  <li><a href="{% url 'about' %}">About</a></li>
+  <li><a href="{% url 'login' %}">Login</a></li>
+  <li><a href="{% url 'logout' %}">Logout</a></li>
+  <li><a href="{% url 'accederCuenta' %}">Cuenta</a></li>
+  <li><a href="{% url 'constantesRedirect' %}">Constantes</a></li>
 </ul>
 <div class="cuerpo">
   {% block cabecera %}

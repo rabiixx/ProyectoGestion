@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from .models import Tabla
 from django.views import generic
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
@@ -13,41 +12,271 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as do_login
 from django.contrib.auth.forms import UserCreationForm
-from .models import ConsumoAgua,ConsumoVehiculo,ConsumoEdificios,ConsumoElectricidad,ConsumoCalefaccion,PersonalEmpresa,ViajesEmpresa,GeneracionElectricidad,TestUsuario
-from .forms import ConsumoAguaForm,ConsumoVehiculoForm,ConsumoEdificiosForm,ConsumoElectricidadForm,ConsumoCalefaccionForm,PersonalEmpresaForm,ViajesEmpresaForm,GeneracionElectricidadForm,TestUsuarioForm
-# Create your views here.
+from .models import ConsumoAgua,ConsumoVehiculo,ConsumoEdificios,ConsumoElectricidad,ConsumoCalefaccion,PersonalEmpresa,ViajesEmpresa,GeneracionElectricidad,TestUsuario, TablaConstantes
+from .forms import ConsumoAguaForm,ConsumoVehiculoForm,ConsumoEdificiosForm,ConsumoElectricidadForm,ConsumoCalefaccionForm,PersonalEmpresaForm,ViajesEmpresaForm,GeneracionElectricidadForm,TestUsuarioForm, TablaConstantesForm
+
+"""  PRIMERA PAGINA DE TODAS   """
+
 def index(request):
+    return redirect('home') 
+    
+"""
+<---------------------------------------------------------------------------------------------->
+<---------------------------------------------------------------------------------------------->
+<---------------------VISTAS DE LAS TABLAS EN LA CUENTA DEL USUARIO----------------------------> 
+<---------------------------------------------------------------------------------------------->
+<---------------------------------------------------------------------------------------------->
+"""
 
-    num_tabla=Tabla.objects.all().count()
+class TestUsuarioListView(generic.ListView):
+    template_name = 'cuenta/testusuario_list.html'
+    def get_queryset(self):
+        queryset = TestUsuario.objects.filter(nombreUsuario__username=self.kwargs['nombre'])
+        return queryset
 
-    return render(request,'index.html',context={'num_tabla':num_tabla},)
+def TestDetallado(request,nomtest):
+    test=TestUsuario.objects.get(nombreTest=nomtest)
+    consumoAgua=ConsumoAgua.objects.get(nombreTest=test)
+    consumoElectricidad=ConsumoElectricidad.objects.get(nombreTest=test)
+    consumoEdificios=ConsumoEdificios.objects.get(nombreTest=test)
+    consumoCalefaccion=ConsumoCalefaccion.objects.get(nombreTest=test)
+    personalEmpresa=PersonalEmpresa.objects.get(nombreTest=test)
+    generacionElectricidad=GeneracionElectricidad.objects.get(nombreTest=test)
+    context={
+    'pk_agua':consumoAgua.id,
+    'pk_electricidad':consumoElectricidad.id,
+    'pk_edificios':consumoEdificios.id,
+    'pk_calefaccion':consumoCalefaccion.id,
+    'pk_personal':personalEmpresa.id,
+    'pk_generacion':generacionElectricidad.id,
+    'nomtest':nomtest,}
+    return render(request, 'testdetallado.html', context)
 
-class TablaListView(generic.ListView):
-    model = Tabla
+""" <-------------------------------CONSUMO DE AGUA----------------------------------------------> """
 
-class TablaDetailView(generic.DetailView):
-    model = Tabla
+class ConsumoAguaDetailView(generic.DetailView):
+    model = ConsumoAgua
+    template_name = 'cuenta/consumoagua_detail.html'
+
+def ConsumoAguaModify(request,pk):
+    form=ConsumoAguaForm()
+    if request.method == "POST":
+        form = ConsumoAguaForm(request.POST)
+        if form.is_valid():
+            instancia = form.save(commit=False)
+            ConsumoAgua.objects.filter(id=pk).update(litrosAgua=instancia.litrosAgua)
+            return redirect('../ConsumoAguaDetail/'+ pk)
+    return render(request, 'cuenta/consumoaguamodify.html',{'form': form})
+
+""" <-------------------------------CONSUMO DE VEHICULOS----------------------------------------------> """
+
+class ConsumoVehiculoListView(generic.ListView):
+    template_name = 'cuenta/consumovehiculo_list.html'
+    def get_queryset(self):
+        queryset = ConsumoVehiculo.objects.filter(nombreTest__nombreTest=self.kwargs['nomtest'])
+        return queryset
+
+class ConsumoVehiculoDetailView(generic.DetailView):
+    model = ConsumoVehiculo
+    template_name = 'cuenta/consumovehiculo_detail.html'
+
+def ConsumoVehiculoModify(request,pk):
+    form=ConsumoVehiculoForm()
+    if request.method == "POST":
+        form = ConsumoVehiculoForm(request.POST)
+        if form.is_valid():
+            instancia = form.save(commit=False)
+            ConsumoVehiculo.objects.filter(id=pk).update(tipoVehiculo=instancia.tipoVehiculo,kilometrosSemana=instancia.kilometrosSemana,tipoCombustible=instancia.tipoCombustible)
+            return redirect('../ConsumoVehiculoDetail/'+ pk)
+    return render(request, 'cuenta/consumovehiculomodify.html',{'form': form})
+
+""" <-----------------------------------CONSUMO DE EDIFICIOS----------------------------------------------> """
+class ConsumoEdificiosDetailView(generic.DetailView):
+    model = ConsumoEdificios
+    template_name = 'cuenta/consumoedificios_detail.html'
+
+def ConsumoEdificiosModify(request,pk):
+    form=ConsumoEdificiosForm()
+    if request.method == "POST":
+        form = ConsumoEdificiosForm(request.POST)
+        if form.is_valid():
+            instancia = form.save(commit=False)
+            ConsumoEdificios.objects.filter(id=pk).update(numeroEdificios=instancia.numeroEdificios,tipoEdificio=instancia.tipoEdificio)
+            return redirect('../ConsumoEdificiosDetail/'+ pk)
+    return render(request, 'cuenta/consumoedificiosmodify.html',{'form': form})
+
+""" <--------------------------------CONSUMO DE ELECTRICIDAD----------------------------------------------> """
+
+class ConsumoElectricidadDetailView(generic.DetailView):
+    model = ConsumoElectricidad
+    template_name = 'cuenta/consumoelectricidad_detail.html'
+
+def ConsumoElectricidadModify(request,pk):
+    form=ConsumoElectricidadForm()
+    if request.method == "POST":
+        form = ConsumoElectricidadForm(request.POST)
+        if form.is_valid():
+            instancia = form.save(commit=False)
+            ConsumoElectricidad.objects.filter(id=pk).update(kwHora=instancia.kwHora)
+            return redirect('../ConsumoElectricidadDetail/'+ pk)
+    return render(request, 'cuenta/consumoelectricidadmodify.html',{'form': form})
+
+""" <---------------------------------CONSUMO DE CALEFACCION----------------------------------------------> """
+
+class ConsumoCalefaccionDetailView(generic.DetailView):
+    model = ConsumoCalefaccion
+    template_name = 'cuenta/consumocalefaccion_detail.html'
+
+def ConsumoCalefaccionModify(request,pk):
+    form=ConsumoCalefaccionForm()
+    if request.method == "POST":
+        form = ConsumoCalefaccionForm(request.POST)
+        if form.is_valid():
+            instancia = form.save(commit=False)
+            ConsumoCalefaccion.objects.filter(id=pk).update(tipo=instancia.tipo, gasto=instancia.gasto)
+            return redirect('../ConsumoCalefaccionDetail/'+ pk)
+    return render(request, 'cuenta/consumocalefaccionmodify.html',{'form': form})
+""" <------------------------------------CONSUMO DE PERSONAL----------------------------------------------> """
+
+class PersonalEmpresaDetailView(generic.DetailView):
+    model = PersonalEmpresa
+    template_name = 'cuenta/personalempresa_detail.html'
+
+def PersonalEmpresaModify(request,pk):
+    form=PersonalEmpresaForm()
+    if request.method == "POST":
+        form = PersonalEmpresaForm(request.POST)
+        if form.is_valid():
+            instancia = form.save(commit=False)
+            PersonalEmpresa.objects.filter(id=pk).update(numeroPersonal=instancia.numeroPersonal)
+            return redirect('../PersonalEmpresaDetail/'+ pk)
+    return render(request, 'cuenta/personalempresamodify.html',{'form': form})
+""" <--------------------------------------CONSUMO DE VIAJES----------------------------------------------> """
+
+class ViajesEmpresaListView(generic.ListView):
+    template_name = 'cuenta/viajesempresa_list.html'
+    def get_queryset(self):
+        queryset = ViajesEmpresa.objects.filter(nombreTest__nombreTest=self.kwargs['nomtest'])
+        return queryset
+
+class ViajesEmpresaDetailView(generic.DetailView):
+    model = ViajesEmpresa
+    template_name = 'cuenta/viajesempresa_detail.html'
+
+def ViajesEmpresaModify(request,pk):
+    form=ViajesEmpresaForm()
+    if request.method == "POST":
+        form = ViajesEmpresaForm(request.POST)
+        if form.is_valid():
+            instancia = form.save(commit=False)
+            ViajesEmpresa.objects.filter(id=pk).update(tipoVehiculo=instancia.tipoVehiculo,numeroViajes=instancia.numeroViajes, distanciaMedia=instancia.distanciaMedia,tipoCombustible=instancia.tipoCombustible)
+            return redirect('../ViajesEmpresaDetail/'+ pk)
+    return render(request, 'cuenta/viajesempresamodify.html',{'form': form})
+
+""" <----------------------------------GENERACION ELECTRICIDAD----------------------------------------------> """
+
+class GeneracionElectricidadDetailView(generic.DetailView):
+    model = GeneracionElectricidad
+    template_name = 'cuenta/generacionelectricidad_detail.html'
+
+def GeneracionElectricidadModify(request,pk):
+    form=GeneracionElectricidadForm()
+    if request.method == "POST":
+        form = GeneracionElectricidadForm(request.POST)
+        if form.is_valid():
+            instancia = form.save(commit=False)
+            GeneracionElectricidad.objects.filter(id=pk).update(cantidadGenerada=instancia.cantidadGenerada, tipo=instancia.tipo)
+            return redirect('../GeneracionElectricidadDetail/'+ pk)
+    return render(request, 'cuenta/generacionelectricidadmodify.html',{'form': form})
+
+""" 
+<---------------------------------------------------------------------------------------------->
+<---------------------------------------------------------------------------------------------->
+<------------------------------------VISTAS DEL TEST-------------------------------------------> 
+<---------------------------------------------------------------------------------------------->
+<---------------------------------------------------------------------------------------------->
+"""
 
 def resultado(request,nombreTest_id):
+    auxiliar=TestUsuario.objects.get(nombreTest=nombreTest_id)
+    agua=ConsumoAgua.objects.get(nombreTest__nombreTest=nombreTest_id)
+    edificio=ConsumoEdificios.objects.get(nombreTest__nombreTest=nombreTest_id)
+    electricidad=ConsumoElectricidad.objects.get(nombreTest__nombreTest=nombreTest_id)
+    calefaccion=ConsumoCalefaccion.objects.get(nombreTest__nombreTest=nombreTest_id)
+    personal=PersonalEmpresa.objects.get(nombreTest__nombreTest=nombreTest_id)
+    generacion=GeneracionElectricidad.objects.get(nombreTest__nombreTest=nombreTest_id)
+    tablacons=TablaConstantes.objects.get(nombreUsuario=request.user)
 
-    #res = TestUsuario.objects.get(nombreTest = nombreTest_id)
-    #co2_total = res.co2_agua + res.co2_vehiculo + res.co2_edificios + res.co2_electricidad + res.co2_calefaccion
-    
+    auxiliar.co2_agua=agua.litrosAgua*tablacons.cons_agua
 
-    co2_vehiculos_total = 0
-    test_name = TestUsuario.objects.get(nombreTest = nombreTest_id)
-    entradas = ConsumoVehiculo.objects.filter(nombreTest = test_name)
-    for x in range(0, entradas.count()):
-        co2_vehiculos_total += entradas[x].co2_vehiculo
+    if edificio.tipoEdificio=='Madera':
+        auxiliar.co2_edificios=edificio.numeroEdificios*tablacons.cons_edificios_madera
+    elif edificio.tipoEdificio=='Acero':
+        auxiliar.co2_edificios=edificio.numeroEdificios*tablacons.cons_edificios_acero
+    elif edificio.tipoEdificio=='Cemento':
+        auxiliar.co2_edificios=edificio.numeroEdificios*tablacons.cons_edificios_cemento
 
-    test_name.co2_total = co2_vehiculos_total
-    test_name.save()
+    auxiliar.co2_electricidad=electricidad.kwHora*tablacons.cons_electricidad
 
+    if calefaccion.tipo=='Gas Natural':
+        auxiliar.co2_calefaccion=calefaccion.gasto*tablacons.cons_calefaccion_gasnatural
+    elif calefaccion.tipo=='Eléctrico':
+        auxiliar.co2_calefaccion=calefaccion.gasto*tablacons.cons_calefaccion_electrico
+    elif calefaccion.tipo=='Carbón':
+        auxiliar.co2_calefaccion=calefaccion.gasto*tablacons.cons_calefaccion_carbon
+    elif calefaccion.tipo=='Gasóleo':
+        auxiliar.co2_calefaccion=calefaccion.gasto*tablacons.cons_calefaccion_gasoleo
+
+    auxiliar.co2_personal=personal.numeroPersonal*tablacons.cons_personal
+
+    if generacion.tipo=='Paneles Solares':
+        auxiliar.co2_generacion=generacion.cantidadGenerada*tablacons.cons_generacion_panelessolares
+    elif generacion.tipo=='Minieolica':
+        auxiliar.co2_generacion=generacion.cantidadGenerada*tablacons.cons_generacion_minieolica
+
+    auxiliar.co2_vehiculo=0;
+    listaVehiculos = ConsumoVehiculo.objects.filter(nombreTest__nombreTest=nombreTest_id)
+    if listaVehiculos.count()>0:
+        for x in listaVehiculos:
+            auxiliar.co2_vehiculo=auxiliar.co2_vehiculo+x.kilometrosSemana
+
+    auxiliar.co2_viajes=0;
+    listaViajes = ViajesEmpresa.objects.filter(nombreTest__nombreTest=nombreTest_id)
+    if listaViajes.count()>0:
+        for x in listaViajes:
+            auxiliar.co2_viajes=auxiliar.co2_viajes+x.distanciaMedia
+
+
+    auxiliar.co2_total=auxiliar.co2_agua+auxiliar.co2_vehiculo+auxiliar.co2_edificios+auxiliar.co2_electricidad+auxiliar.co2_calefaccion+auxiliar.co2_personal+auxiliar.co2_viajes-auxiliar.co2_generacion
+    auxiliar.save()
     context={
         'url': nombreTest_id,
-        'res': test_name
+        'co2_agua':auxiliar.co2_agua,
+        'co2_vehiculo':auxiliar.co2_vehiculo,
+        'co2_edificios':auxiliar.co2_edificios,
+        'co2_electricidad':auxiliar.co2_electricidad,
+        'co2_calefaccion':auxiliar.co2_calefaccion,
+        'co2_personal':auxiliar.co2_personal,
+        'co2_viajes':auxiliar.co2_viajes,
+        'co2_generacion':auxiliar.co2_generacion,
+        'co2_total':auxiliar.co2_total,
     }
     return render(request, 'test/resultado.html', context)
+
+def compensacion(request,nombreTest_id):
+    auxiliar=TestUsuario.objects.get(nombreTest=nombreTest_id)
+    print(auxiliar)
+    tablacons=TablaConstantes.objects.get(nombreUsuario=request.user)
+    esp=tablacons.cons_compensar_españa*auxiliar.co2_total
+    otr=tablacons.cons_compensar_otros*auxiliar.co2_total
+    print(auxiliar.co2_total)
+    context={
+        'url': nombreTest_id,
+        'co2_total':auxiliar.co2_total,
+        'españa':esp,
+        'otros':otr,
+    }
+    return render(request, 'test/compensacion.html', context)
 
 def vehiculospregunta(request,nombreTest_id):
     context={
@@ -55,11 +284,14 @@ def vehiculospregunta(request,nombreTest_id):
     }
     return render(request, 'test/vehiculospregunta.html', context)
 
+def viajespregunta(request,nombreTest_id):
+    context={
+        'url': nombreTest_id,
+    }
+    return render(request, 'test/viajespregunta.html', context)
+
 def home(request):
 	 return render(request, 'home.html')
-
-def radio_buttons(request):
-    return render(request, 'radio.html')
 
 def about(request):
     return render(request, 'about.html')
@@ -97,7 +329,6 @@ def agua(request,nombreTest_id):
             instancia = form.save(commit=False)
             auxiliar=TestUsuario.objects.get(nombreTest=nombreTest_id)
             instancia.nombreTest=auxiliar
-            print(auxiliar)
             instancia.nombreUsuario = request.user
             instancia.save()
             return redirect('../../vehiculos/'+nombreTest_id)
@@ -111,29 +342,13 @@ def vehiculos(request,nombreTest_id):
         # Añadimos los datos recibidos al formulario
         form = ConsumoVehiculoForm(request.POST)
         # Si el formulario es válido...
+        
         if form.is_valid():
             instancia = form.save(commit=False)
-
-            print(form.cleaned_data)
-
-            # Calculo CO2 API
-            query = 'https://api.triptocarbon.xyz/v1/footprint?activity=' + str(form.cleaned_data['kilometrosSemana']) + \
-                    '&activityType=miles&country=def&mode=' + form.cleaned_data['tipoVehiculo'] + \
-                    '&fuelType=' + form.cleaned_data['tipoCombustible']
-            print(query )
-
-
-            # Se hace la consulta a la API
-            response = urlopen(query)
-            data = json.loads(response.read())
-
-            instancia.co2_vehiculo = data['carbonFootprint']
-            print(data['carbonFootprint'])
-            
-            auxiliar = TestUsuario.objects.get(nombreTest = nombreTest_id)
-            instancia.nombreTest = auxiliar
+            auxiliar=TestUsuario.objects.get(nombreTest=nombreTest_id)
+            instancia.nombreTest=auxiliar
             instancia.nombreUsuario = request.user
-            instancia.save()
+            instancia.save()    
             return redirect('../../vehiculospregunta/'+nombreTest_id)
     # Si llegamos al final renderizamos el formulario
     return render(request, 'test/vehiculos.html', {'form': form})
@@ -201,7 +416,7 @@ def viajes(request,nombreTest_id):
             instancia.nombreTest=auxiliar
             instancia.nombreUsuario = request.user
             instancia.save()
-            return redirect('../../generacionElectricidad/'+nombreTest_id)
+            return redirect('../../viajespregunta/'+nombreTest_id)
     return render(request, 'test/viajes.html', {'form': form})
 
 def generacionElectricidad(request,nombreTest_id):
@@ -216,6 +431,14 @@ def generacionElectricidad(request,nombreTest_id):
             instancia.save()
             return redirect('../../resultado/'+nombreTest_id)
     return render(request, 'test/generarElectricidad.html', {'form': form})
+
+""" 
+<---------------------------------------------------------------------------------------------->
+<---------------------------------------------------------------------------------------------->
+<------------------------------------LOGIN Y REGISTRO------------------------------------------> 
+<---------------------------------------------------------------------------------------------->
+<---------------------------------------------------------------------------------------------->
+"""
 
 def register(request):
     # Creamos el formulario de autenticación vacío
@@ -233,6 +456,9 @@ def register(request):
             if user is not None:
                 # Hacemos el login manualmente
                 do_login(request, user)
+                #Creamos una tabla de constantes
+                constantes = TablaConstantes.objects.create(nombreUsuario=request.user)
+                constantes.save()
                 # Y le redireccionamos a la portada
                 return redirect('home')
 
@@ -268,22 +494,38 @@ def logout(request):
     do_logout(request)
     return redirect('home')
 
-def cuenta(request):
+
+def accederCuenta(request):
     if request.user.is_authenticated:
-        context={
-       'num_Agua':ConsumoAgua.objects.filter(nombreUsuario=request.user).count(),
-        'num_ConsumoVehiculo':ConsumoVehiculo.objects.filter(nombreUsuario=request.user).count(),
-        'num_ConsumoEdificios':ConsumoEdificios.objects.filter(nombreUsuario=request.user).count(),
-        'num_ConsumoElectricidad':ConsumoElectricidad.objects.filter(nombreUsuario=request.user).count(),
-        'num_ConsumoCalefaccion':ConsumoCalefaccion.objects.filter(nombreUsuario=request.user).count(),
-        'num_PersonalEmpresa':PersonalEmpresa.objects.filter(nombreUsuario=request.user).count(),
-        'num_ViajesEmpresa':ViajesEmpresa.objects.filter(nombreUsuario=request.user).count(),
-        'num_GeneracionElectricidad':GeneracionElectricidad.objects.filter(nombreUsuario=request.user).count(),
-        }
-        return render(request,'cuenta.html', context)
+        return redirect('../cuenta/'+request.user.username)
     else:
-        return redirect('login')
+        return redirect('../login')
 
+def constantesRedirect(request):
+    if request.user.is_authenticated:
+        tabla = TablaConstantes.objects.get(nombreUsuario=request.user)
+        return redirect('../tablaconstantesDetail/' + str(tabla.id))
+    else:
+        return redirect('../login')
 
-class AguaListView(generic.ListView):
-    model = ConsumoAgua
+class constantesDetailView(generic.DetailView):
+    model = TablaConstantes
+    template_name = 'cuenta/tablaconstantes_detail.html'
+
+def constantesModify(request,pk):
+    form=TablaConstantesForm()
+    if request.method == "POST":
+        form = TablaConstantesForm(request.POST)
+        if form.is_valid():
+            instancia = form.save(commit=False)
+            TablaConstantes.objects.filter(id=pk).update(cons_agua=instancia.cons_agua, 
+                cons_edificios_madera=instancia.cons_edificios_madera,cons_edificios_acero=instancia.cons_edificios_acero,cons_edificios_cemento=instancia.cons_edificios_cemento,
+                cons_electricidad=instancia.cons_electricidad, 
+                cons_calefaccion_gasnatural=instancia.cons_calefaccion_gasnatural,cons_calefaccion_electrico=instancia.cons_calefaccion_electrico,
+                cons_calefaccion_carbon=instancia.cons_calefaccion_carbon,cons_calefaccion_gasoleo=instancia.cons_calefaccion_gasoleo,
+                cons_personal=instancia.cons_personal, 
+                cons_viajes=instancia.cons_viajes,
+                cons_generacion_panelessolares=instancia.cons_generacion_panelessolares,cons_generacion_minieolica=instancia.cons_generacion_minieolica,
+                cons_compensar_españa=instancia.cons_compensar_españa,cons_compensar_otros=instancia.cons_compensar_otros,)
+            return redirect('../../tablaconstantesDetail/'+ pk)
+    return render(request, 'cuenta/tablaconstantesmodify.html',{'form': form})
