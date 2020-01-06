@@ -19,7 +19,9 @@ El cálculo del consumo de CO2 se realiza mediante un "test": una serie de pará
 
 ## Diseño
 
+* **Home** - Página principal.
 * **Calculadora** - Comienza la realización de un test. Es necesario estar logeado.
+* **About** -  Nuestros nombres.
 * **Login** -  Iniciar sesión/Crear cuenta.  
 * **Logout** - Cerrar sesión.
 * **Cuenta** - Muestra un listado con todos los test y un botón para recalcular su valor. Cada test lleva al listado de las tablas que los compone. Cada tabla se puede modificar. Es necesario estar logeado.
