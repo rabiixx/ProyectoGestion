@@ -1,9 +1,10 @@
-# Pratica 4 - Diagrama de contexto C4
+## Pratica 4 - Diagrama de contexto C4
 
 ## Descripcion
 * Hemos realizado el diagram de contexto medainte el programa Visual Paradigm.
 * [Projecto VPP](https://github.com/rabiixx/ProyectoGestion/tree/master/DiagramaC4_VPP)
 
+# Proyecto
 ## Autores
 
 * **Ruben Cherif Narvaez** - 99rubenche@gmail.com - [rabiixx](https://github.com/rabiixx)
