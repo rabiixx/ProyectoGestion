@@ -1,1 +1,10 @@
-[No es necesario instalar ninguna librería exceptuando Django]
+### Prerequisitos
+
+* json:
+```
+pip install json 
+```
+* urlopen
+```
+pip install urlopen
+```
