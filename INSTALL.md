@@ -1,1 +1,1 @@
-[No es necesario instalar ninguna librería además de Django]
+[No es necesario instalar ninguna librería exceptuando Django]
