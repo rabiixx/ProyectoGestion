@@ -1,16 +1,5 @@
 # Proyecto - Pagina Web CO2
 
-### Prerequisitos
-
-* json:
-```
-pip intall json 
-```
-* urlopen
-```
-pip install urlopen
-```
-
 ## Funcionamiento
 
 El cálculo del consumo de CO2 se realiza mediante un "test": una serie de parámetros de entrada que el usuario debe rellenar. Nos referimos a cada conjunto de parámetros como "tablas". El resultado final del test depende tanto de los valores almacenados en las tablas como de unos parámetros denominados "constantes" (factores de conversión de las tablas a CO2). Tanto las tablas como las constantes se pueden modificar, y los resultados de los test se pueden recalcular con esos datos guardados. El único dato funcional que no se puede modificar es el factor de conversión del consumo de los vehículos, ya que se realiza mediante una API. Se pueden realizar tantos tests como se desee. 
