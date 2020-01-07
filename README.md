@@ -1,18 +1,15 @@
-## Pratica 4 - Diagrama de contexto C4
+# Proyecto - Pagina Web CO2
 
-## Descripcion
-* Hemos realizado el diagram de contexto medainte el programa Visual Paradigm.
-* [Projecto VPP](https://github.com/rabiixx/ProyectoGestion/tree/master/DiagramaC4_VPP)
+### Prerequisitos
 
-# Proyecto
-## Autores
-
-* **Ruben Cherif Narvaez** - 99rubenche@gmail.com - [rabiixx](https://github.com/rabiixx)
-
-* **Josune Sorbet Molina** - [josune](https://github.com/josune99)
-
-* **Xabi Jimenez Cuesta** - [sabi](https://github.com/sabitopito)
-
+* json:
+```
+pip intall json 
+```
+* urlopen
+```
+pip install urlopen
+```
 
 ## Funcionamiento
 
@@ -28,3 +25,11 @@ El cálculo del consumo de CO2 se realiza mediante un "test": una serie de pará
 * **Cuenta** - Muestra un listado con todos los test y un botón para recalcular su valor. Cada test lleva al listado de las tablas que los compone. Cada tabla se puede modificar. Es necesario estar logeado.
 * **Constantes** - Muestra la lista de factores de conversión usados para calcular el consumo de CO2 de cada una de las tablas. Todas se pueden modificar. Es necesario estar logeado.
 
+
+## Autores
+
+* **Ruben Cherif Narvaez** - 99rubenche@gmail.com - [rabiixx](https://github.com/rabiixx)
+
+* **Josune Sorbet Molina** - [josune](https://github.com/josune99)
+
+* **Xabi Jimenez Cuesta** - [sabi](https://github.com/sabitopito)
