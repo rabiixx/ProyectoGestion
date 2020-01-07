@@ -251,12 +251,22 @@ def resultado(request,nombreTest_id):
             data = data + float(res['carbonFootprint'])
 
             auxiliar.co2_vehiculo = data
+#Consumo de viajes
     auxiliar.co2_viajes=0;
-    listaViajes = ViajesEmpresa.objects.filter(nombreTest__nombreTest=nombreTest_id)
-    if listaViajes.count()>0:
-        for x in listaViajes:
-            auxiliar.co2_viajes=auxiliar.co2_viajes+x.distanciaMedia
+    viajesEmpresa = ViajesEmpresa.objects.filter(nombreTest__nombreTest=nombreTest_id)
+    datos=0
+    if viajesEmpresa.count()>0:
+        for x in viajesEmpresa:
+            query = 'https://api.triptocarbon.xyz/v1/footprint?activity=' + str(x.distanciaMedia) + \
+                    '&activityType=miles&country=def&mode=' + x.tipoVehiculo + \
+                    '&fuelType=' + x.tipoCombustible
 
+            # Se hace la consulta a la API
+            response = urlopen(query)
+            res = json.loads(response.read())
+            datos = datos + float(res['carbonFootprint'])
+
+            auxiliar.co2_viajes = datos
 
 
     auxiliar.co2_total=auxiliar.co2_agua+auxiliar.co2_vehiculo+auxiliar.co2_edificios+auxiliar.co2_electricidad+auxiliar.co2_calefaccion+auxiliar.co2_personal+auxiliar.co2_viajes-auxiliar.co2_generacion
